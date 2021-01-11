@@ -1,0 +1,13 @@
+/dist/
+/build/
+/main.spec
+/log.txt
+/ignore/
+/.idea/
+/venv/
+*/__pycache__/
+/main.py
+/test.py
+/logs/
+*.pyc
+/config.ini
