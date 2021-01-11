@@ -40,8 +40,12 @@ class Solver(object):
 
         self.use_log = self.conf.get('Log', 'open', default='True') == 'True'
         if self.use_log:
+
             log_name = self.conf.get('Log', 'file_name', default="log_{time}.txt").format(time=time.time())
-            self.log_path = os.path.join(self.conf.BasePath,'logs', log_name)
+            folder_path=os.path.join(self.conf.BasePath, 'logs')
+            if not os.path.exists(folder_path):
+                os.mkdir(folder_path)
+            self.log_path = os.path.join(folder_path, log_name)
 
         self.Stages = [stage(self) for stage in Stages]
         self.cli_logger = Logger.Logger
