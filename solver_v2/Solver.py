@@ -138,8 +138,8 @@ class Solver(object):
                 ans = self.terminator.deal(status)
         if ans is not None:
             self.log("recommend:", ans)
-            TTS(ans)
             if self.recall is not None:self.recall(ans)
+            TTS(ans)
         else:
             print("no recommend")
         return ans
