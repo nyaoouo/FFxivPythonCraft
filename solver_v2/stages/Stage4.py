@@ -5,11 +5,11 @@ combo = ['阔步', '改革', '观察', '注视加工', '阔步', '比尔格的�
 
 
 def score_grade(score: int):
-    if score < 5800:
+    if score < 58000:
         return 0
-    elif score < 6500:
+    elif score < 65000:
         return 1
-    elif score < 7700:
+    elif score < 77000:
         return 2
     else:
         return 3
@@ -57,5 +57,5 @@ class Stage4(StageBase):
         temp.ball = BallManager.RedBall
         new_score=temp.use_skill(SkillManager['比尔格的祝福']).currentQuality
         new_grade =  score_grade(new_score)
-        self.log("score if use:",new_score)
+        self.log("score if use:",new_score,new_grade)
         return new_grade >= self.change_grade and new_grade>current_grade
