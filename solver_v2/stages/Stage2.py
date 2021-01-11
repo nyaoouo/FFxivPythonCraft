@@ -12,7 +12,7 @@ class Stage2(StageBase):
         if status.rounds >= 25 or status.currentCp < 300 or (self.count >= 8 and status.get_buff('内静').data["lv"] < 7):
             return 'terminate'
         if status.ball == BallManager.GreenBall:
-            if status.has_buff('掌握'):
+            if not status.has_buff('掌握'):
                 return "掌握"
             if status.currentDurability < 20:
                 return "精修"

@@ -14,7 +14,7 @@ class Stage1(StageBase):
         if status.rounds == 1:
             return '闲静'
         if status.ball == BallManager.GreenBall:
-            if status.has_buff('掌握'): return '掌握'
+            if not status.has_buff('掌握'): return '掌握'
             if status.currentDurability < 20: return '精修'
             # if status.has_buff('俭约'): return '长期俭约'
         if status.ball == BallManager.RedBall:
