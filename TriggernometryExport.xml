@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<TriggernometryExport Version="1">
+  <ExportedFolder Id="acc50c62-3c5a-4d3a-87ad-2140c4119320" Name="接口" Enabled="true">
+    <Folders>
+      <Folder Id="95120710-9569-4c36-b6bb-670f1123b8da" Name="关" Enabled="true">
+        <Folders>
+          <Folder Id="da2c3226-ed1b-41b8-aa39-49bd5000d4a6" Name="练习" Enabled="true">
+            <Folders />
+            <Triggers>
+              <Trigger Enabled="true" Name="成功" Id="7e2d3b8d-4d9e-44cd-aa85-48b433d13976" RegularExpression="^.{14} 00:0842:(.+)练习制作(.+)成功了！$">
+                <Actions>
+                  <Action OrderNumber="1" LogLevel="-1" TextAuraFontSize="9" TextAuraFontName="PMingLiU" TriggerId="d2ff9644-c0d0-43f2-8b24-c87a54a4273e" TriggerText="@pythonCraft end" ActionType="Trigger">
+                    <Condition Enabled="false" Grouping="Or" />
+                  </Action>
+                </Actions>
+                <Condition Enabled="false" Grouping="Or" />
+              </Trigger>
+              <Trigger Enabled="true" Name="失败" Id="2d92050b-a01a-405b-97f8-5bc7c2a8a846" RegularExpression="^.{14} 00:0842:(.+)练习制作(.+)失败了……$">
+                <Actions>
+                  <Action OrderNumber="1" LogLevel="-1" TextAuraFontSize="9" TextAuraFontName="PMingLiU" TriggerId="d2ff9644-c0d0-43f2-8b24-c87a54a4273e" TriggerText="@pythonCraft end" ActionType="Trigger">
+                    <Condition Enabled="false" Grouping="Or" />
+                  </Action>
+                </Actions>
+                <Condition Enabled="false" Grouping="Or" />
+              </Trigger>
+              <Trigger Enabled="true" Name="终止" Id="017541a0-eb2b-4a7f-9805-e330aa8533a6" RegularExpression="^.{14} 00:0842:(.+)停止了练习。$">
+                <Actions>
+                  <Action OrderNumber="1" LogLevel="-1" TextAuraFontSize="9" TextAuraFontName="PMingLiU" TriggerId="d2ff9644-c0d0-43f2-8b24-c87a54a4273e" TriggerText="@pythonCraft end" ActionType="Trigger">
+                    <Condition Enabled="false" Grouping="Or" />
+                  </Action>
+                </Actions>
+                <Condition Enabled="false" Grouping="Or" />
+              </Trigger>
+            </Triggers>
+          </Folder>
+          <Folder Id="f1ef31ac-e9f8-4bfc-a859-cbbf545b11f7" Name="正式" Enabled="true">
+            <Folders />
+            <Triggers>
+              <Trigger Enabled="true" Name="成功" Id="290a0256-5751-445b-84c2-b2c69986b7d1" RegularExpression="^.{14} 00:08c2:(.+)制作“(.+)”成功！$">
+                <Actions>
+                  <Action OrderNumber="1" LogLevel="-1" TextAuraFontSize="9" TextAuraFontName="PMingLiU" TriggerId="d2ff9644-c0d0-43f2-8b24-c87a54a4273e" TriggerText="@pythonCraft end" ActionType="Trigger">
+                    <Condition Enabled="false" Grouping="Or" />
+                  </Action>
+                </Actions>
+                <Condition Enabled="false" Grouping="Or" />
+              </Trigger>
+              <Trigger Enabled="true" Name="失败" Id="bec7bf9f-d0a9-405f-858e-f5b0328a3d35" RegularExpression="^.{14} 00:0842:(.+)制作失败了……$">
+                <Actions>
+                  <Action OrderNumber="1" LogLevel="-1" TextAuraFontSize="9" TextAuraFontName="PMingLiU" TriggerId="d2ff9644-c0d0-43f2-8b24-c87a54a4273e" TriggerText="@pythonCraft end" ActionType="Trigger">
+                    <Condition Enabled="false" Grouping="Or" />
+                  </Action>
+                </Actions>
+                <Condition Enabled="false" Grouping="Or" />
+              </Trigger>
+              <Trigger Enabled="true" Name="终止" Id="124ad1fc-00ab-465e-b2ae-f5e338869ac0" RegularExpression="^.{14} 00:0842:(.+)中止了制作作业。$">
+                <Actions>
+                  <Action OrderNumber="1" LogLevel="-1" TextAuraFontSize="9" TextAuraFontName="PMingLiU" TriggerId="d2ff9644-c0d0-43f2-8b24-c87a54a4273e" TriggerText="@pythonCraft end" ActionType="Trigger">
+                    <Condition Enabled="false" Grouping="Or" />
+                  </Action>
+                </Actions>
+                <Condition Enabled="false" Grouping="Or" />
+              </Trigger>
+            </Triggers>
+          </Folder>
+        </Folders>
+        <Triggers>
+          <Trigger Enabled="true" Name="操作" Id="d2ff9644-c0d0-43f2-8b24-c87a54a4273e" RegularExpression="^@pythonCraft end$">
+            <Actions>
+              <Action OrderNumber="1" LogLevel="-1" TextAuraFontSize="9" TextAuraFontName="PMingLiU" TriggerId="24f12071-e5ed-4e10-98b4-5a6470d87046" TriggerText="@pythonCraft send end" ActionType="Trigger">
+                <Condition Enabled="false" Grouping="Or" />
+              </Action>
+              <Action OrderNumber="2" LogLevel="-1" VariableName="Crafting" TextAuraFontSize="9" TextAuraFontName="PMingLiU" ActionType="Variable">
+                <Condition Enabled="false" Grouping="Or" />
+              </Action>
+              <Action OrderNumber="3" LogLevel="-1" TextAuraFontSize="9" TextAuraFontName="PMingLiU" TriggerId="f454fa53-2a90-42cd-98af-32d523f0762b" TriggerText="@Craft continue" ActionType="Trigger">
+                <Condition Enabled="false" Grouping="Or" />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+          </Trigger>
+        </Triggers>
+      </Folder>
+      <Folder Id="0aff9496-9817-4964-a181-cf56360a4526" Name="开" Enabled="true">
+        <Folders />
+        <Triggers>
+          <Trigger Enabled="true" Name="练习" Id="f2654238-20e7-474d-bb61-69906df48aa9" RegularExpression="^.{14} 00:0842:(.+)开始练习制作([^。]+)。$">
+            <Actions>
+              <Action OrderNumber="1" LogLevel="-1" TextAuraFontSize="9" TextAuraFontName="PMingLiU" TriggerId="38246e69-de5c-48ee-8478-e073bca4a64c" TriggerText="@pythonCraft start $2" ActionType="Trigger">
+                <Condition Enabled="false" Grouping="Or" />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+          </Trigger>
+          <Trigger Enabled="true" Name="正式" Id="73445066-c9db-4138-8a87-d1c66758b61a" RegularExpression="^.{14} 00:0842:(.+)开始制作“([^。]+)”。$">
+            <Actions>
+              <Action OrderNumber="1" LogLevel="-1" TextAuraFontSize="9" TextAuraFontName="PMingLiU" TriggerId="38246e69-de5c-48ee-8478-e073bca4a64c" TriggerText="@pythonCraft start $2" ActionType="Trigger">
+                <Condition Enabled="false" Grouping="Or" />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+          </Trigger>
+          <Trigger Enabled="true" Name="操作" Id="38246e69-de5c-48ee-8478-e073bca4a64c" RegularExpression="^@pythonCraft start (.+)$">
+            <Actions>
+              <Action OrderNumber="1" LogLevel="-1" TextAuraFontSize="9" TextAuraFontName="PMingLiU" TriggerId="24f12071-e5ed-4e10-98b4-5a6470d87046" TriggerText="@pythonCraft send start $1" ActionType="Trigger">
+                <Condition Enabled="false" Grouping="Or" />
+              </Action>
+              <Action OrderNumber="2" LogLevel="-1" VariableOp="SetNumeric" VariableName="Crafting" VariableExpression="1" TextAuraFontSize="9" TextAuraFontName="PMingLiU" ActionType="Variable">
+                <Condition Enabled="false" Grouping="Or" />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+          </Trigger>
+        </Triggers>
+      </Folder>
+      <Folder Id="3c4985aa-cfee-4ec1-9234-efad8cd33c9c" Name="技能" Enabled="true">
+        <Folders />
+        <Triggers>
+          <Trigger Enabled="true" Name="操作" Id="f34be729-e462-4b79-83dc-f92bc1d82e3f" RegularExpression="^@pythonCraft use (.+)$">
+            <Actions>
+              <Action OrderNumber="1" LogLevel="-1" TextAuraFontSize="9" TextAuraFontName="PMingLiU" TriggerId="24f12071-e5ed-4e10-98b4-5a6470d87046" TriggerText="@pythonCraft send use $1" ActionType="Trigger">
+                <Condition Enabled="false" Grouping="Or" />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+          </Trigger>
+          <Trigger Enabled="true" Name="技能类" Id="4b4b3857-2870-4e17-ab21-ac881d84e19a" RegularExpression="^.{14} 00:0842:(.+)发动“(.+)”  ⇒ (成功|失败)$">
+            <Actions>
+              <Action OrderNumber="1" LogLevel="-1" TextAuraFontSize="9" TextAuraFontName="PMingLiU" TriggerId="f34be729-e462-4b79-83dc-f92bc1d82e3f" TriggerText="@pythonCraft use $2 $3" ActionType="Trigger">
+                <Condition Enabled="false" Grouping="Or" />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+          </Trigger>
+          <Trigger Enabled="true" Name="buff类" Id="ff81bff9-2ea2-497f-97fb-fa8666077664" RegularExpression="^.{14} 00:082b:(.+)发动了“(.+)”。$">
+            <Actions>
+              <Action OrderNumber="1" LogLevel="-1" TextAuraFontSize="9" TextAuraFontName="PMingLiU" TriggerId="f34be729-e462-4b79-83dc-f92bc1d82e3f" TriggerText="@pythonCraft use $2" ActionType="Trigger">
+                <Condition Enabled="false" Grouping="Or" />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+          </Trigger>
+        </Triggers>
+      </Folder>
+    </Folders>
+    <Triggers>
+      <Trigger Enabled="true" Name="接口" Id="24f12071-e5ed-4e10-98b4-5a6470d87046" RegularExpression="^@pythonCraft send (.+)$">
+        <Actions>
+          <Action OrderNumber="1" JsonEndpointExpression="http://localhost:8000" JsonPayloadExpression="$1" JsonFiringExpression="@pythonCraft res ${_response}" LogLevel="-1" TextAuraFontSize="9" TextAuraFontName="PMingLiU" ActionType="GenericJson">
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Action>
+        </Actions>
+        <Condition Enabled="false" Grouping="Or" />
+      </Trigger>
+    </Triggers>
+  </ExportedFolder>
+</TriggernometryExport>
