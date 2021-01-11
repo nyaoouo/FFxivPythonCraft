@@ -31,7 +31,7 @@
 食用方式
 ----
 >- triggernometry导入TriggernometryExport.xml
->- 启动main.py
+>- 启动FFxivCraftHelper.py
 >- 请在游戏“消息过滤”内——“战斗”类勾选“自己的技能”以及“通知”类勾选“自己的制作信息”
 >- 预先把生产面板恢复默认位置（不能遮盖球的范围)(ocr读球适用)
 >- 开始生产，将自动执行（ ~~如果tts报terminate就是建议倒掉，不过可以试试手动救~~ ~~自毁模式，自动连刷高速/仓促~~ 好吧恢复了tts报terminate）
