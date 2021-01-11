@@ -9,7 +9,8 @@ class _Logger(object):
 
     def __call__(self, msg, *msgs, lv=0, tag=None):
         if lv < self.lv or (tag is not None and tag in self.tags and not self.tags[tag]): return
-        if msgs:msg+="\t"+"\t".join(msgs)
+        msg=str(msg)
+        if msgs:msg+="\t"+"\t".join([str(msg) for msg in msgs])
         print("[{}]\t{}".format(tag, msg))
 
     def showTag(self, tag):

@@ -41,7 +41,7 @@ class Solver(object):
         self.use_log = self.conf.get('Log', 'open', default='True') == 'True'
         if self.use_log:
 
-            log_name = self.conf.get('Log', 'file_name', default="log_{time}.txt").format(time=time.time())
+            log_name = self.conf.get('Log', 'file_name', default="log_{time}.txt").format(time=int(time.time()))
             folder_path=os.path.join(self.conf.BasePath, 'logs')
             if not os.path.exists(folder_path):
                 os.mkdir(folder_path)
@@ -93,18 +93,19 @@ class Solver(object):
         return self.deal(self.status)
 
     def use_skill(self, skill):
-        self.log("use skill %s" % skill.name)
-        self.round_history[-1][0] = skill.name
-        self.status = self.status.use_skill(skill)
-        if not self.status.is_finish():
-            time.sleep(0.5)
-            self.status.ball = self.update_ball()
-            if self.use_memFix:
-                self.memFixer.fix_status(self.status)
-            self.round_history.append([None, type(self.status.ball).__name__])
-            print_status(self.status)
-            return self.deal(self.status, skill)
-        return None
+        if self.status is not None:
+            self.log("use skill %s" % skill.name)
+            self.round_history[-1][0] = skill.name
+            self.status = self.status.use_skill(skill)
+            if not self.status.is_finish():
+                time.sleep(0.5)
+                self.status.ball = self.update_ball()
+                if self.use_memFix:
+                    self.memFixer.fix_status(self.status)
+                self.round_history.append([None, type(self.status.ball).__name__])
+                print_status(self.status)
+                return self.deal(self.status, skill)
+            return None
 
     def end_round(self):
         if self.use_log and self.round_history and self.status is not None:
