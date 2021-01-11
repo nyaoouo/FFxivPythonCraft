@@ -14,8 +14,10 @@ class Stage4(StageBase):
     def deal(self, status, prev_skill=None):
         if prev_skill.name == '设计变动':
             self.design_count += 1
+        self.solver.cli_logger.hideTag('Math')
         if self.Prequeue[0] == '比尔格的祝福' and self.use_change and self.design_count < 3 and self.need_changes(status):
             return '设计变动'
+        self.solver.cli_logger.showTag('Math')
         self.count += 1
         if self.count >= len(combo) and status.currentQuality < 58000:
             return 'terminate'
