@@ -1,5 +1,5 @@
 from . import Maths
-from core.Utils.CallOrVar import CallOrVar
+from .Utils import CallOrVar
 from .Definitions import names
 import math
 

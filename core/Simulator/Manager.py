@@ -1,6 +1,6 @@
 from inspect import isclass
 from . import Models
-from core.Utils.CallOrVar import CallOrVar
+from .Utils import CallOrVar
 
 
 class _SkillManager(dict):
