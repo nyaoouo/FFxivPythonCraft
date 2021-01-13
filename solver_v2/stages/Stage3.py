@@ -37,7 +37,7 @@ class Stage3(StageBase):
         for buff in AllowBuffs:
             if not status.has_buff(buff) and remainCp >= SkillManager.getCp(buff, status):
                 ans.append([buff])
-        if ['改革'] not in ans or status.ball==BallManager.RedBall:
+        if ['改革'] not in ans or status.ball == BallManager.RedBall:
             for skill in AllowSkillSet:
                 if status.currentDurability > SkillManager.getDurability(skill, status) and remainCp >= SkillManager.getCp(skill, status) and \
                         SkillManager[skill].can_use(status):
