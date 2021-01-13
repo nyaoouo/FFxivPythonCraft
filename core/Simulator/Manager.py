@@ -12,7 +12,7 @@ class _SkillManager(dict):
             cls = getattr(Skills, attr)
             if isclass(cls) and cls != Models.SkillBase and issubclass(cls, Models.SkillBase):
                 temp = cls()
-                setattr(self, temp.name, temp)
+                setattr(self, attr, temp)
                 self[temp.name] = getattr(self, temp.name)
                 if not cls.HIDE:
                     self.list.add(temp.name)
