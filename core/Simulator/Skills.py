@@ -1,7 +1,7 @@
-from core.Simulator.Models import SkillBase
-from core.Simulator.Manager import BuffManager, BallManager
+from .Models import SkillBase
+from .Manager import BuffManager, BallManager
 import math
-from core.Simulator.Definitions import names
+from .Definitions import names
 
 
 class TEST_FULL_progress(SkillBase):
@@ -144,6 +144,9 @@ class ByregotsBlessing(SkillBase):
     durability = 10
     cp = 24
 
+    def can_use(self, status):
+        return status.has_buff(names["InnerQuiet"]) and status.get_buff(names["InnerQuiet"]).data["lv"] > 1
+
     def quality(self, status):
         if names["InnerQuiet"] in status.buffs:
             return (status.buffs[names["InnerQuiet"]].data["lv"] - 1) * 20 + 100
@@ -232,6 +235,9 @@ class FocusedTouch(SkillBase):
     cp = 18
     durability = 10
     quality = 150
+
+    def can_use(self, status):
+        return status.has_buff(names["Observe"])
 
 
 class FocusedSynthesisFail(SkillBase):

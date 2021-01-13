@@ -1,5 +1,5 @@
 from inspect import isclass
-from core.Simulator import Models
+from . import Models
 from core.Utils.CallOrVar import CallOrVar
 
 

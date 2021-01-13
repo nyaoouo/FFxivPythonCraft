@@ -1,4 +1,4 @@
-from core.Simulator import Maths
+from . import Maths
 from core.Utils.CallOrVar import CallOrVar
 
 
@@ -77,10 +77,10 @@ class Status(object):
         temp = self.clone()
         if forceBall is not None:
             temp.ball = forceBall
-        if not skill.can_use(temp):
+        """if not skill.can_use(temp):
             print(temp.get_status_string())
             print(skill.name)
-            raise Exception("skill cannot be used")
+            raise Exception("skill cannot be used")"""
         temp.currentProgress = min(temp.currentProgress + skill.calc_progress(temp), temp.target.maxProgress)
         temp.currentQuality = min(temp.currentQuality + skill.calc_quality(temp), temp.target.maxQuality)
         temp.currentCp = max(temp.currentCp - skill.calc_cp(temp), 0)

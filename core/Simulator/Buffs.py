@@ -1,5 +1,5 @@
-from core.Simulator.Models import BuffBase
-from core.Simulator.Definitions import names
+from .Models import BuffBase
+from .Definitions import names
 import math
 
 

@@ -1,6 +1,6 @@
-from core.Simulator import Maths
+from . import Maths
 from core.Utils.CallOrVar import CallOrVar
-from core.Simulator.Definitions import names
+from .Definitions import names
 import math
 
 

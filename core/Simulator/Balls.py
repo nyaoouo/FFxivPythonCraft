@@ -1,4 +1,4 @@
-from core.Simulator.Models import BallBase
+from .Models import BallBase
 
 
 class WhiteBall(BallBase):

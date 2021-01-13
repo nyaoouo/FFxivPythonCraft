@@ -1,4 +1,4 @@
-from core.Simulator.Maths import lv2clv
+from .Maths import lv2clv
 
 
 class Crafter(object):
