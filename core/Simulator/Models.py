@@ -102,3 +102,6 @@ class BallBase(object):
 
     def __str__(self):
         return self.name
+
+    def after_use(self, status):
+        pass

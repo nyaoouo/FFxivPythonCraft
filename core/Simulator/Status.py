@@ -92,6 +92,7 @@ class Status(object):
                 del temp.buffs[tempBuff.name]
         if not skill.KEEP_ROUND:
             temp.buff_goes_next()
+        temp.ball.after_use(temp)
         while temp.buffsToAdd:
             tempBuff = temp.buffsToAdd.pop()
             temp.buffs[tempBuff.buff.name] = tempBuff
