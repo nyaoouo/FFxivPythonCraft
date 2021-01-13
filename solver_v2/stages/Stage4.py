@@ -51,7 +51,7 @@ class Stage4(StageBase):
         current_score=status.use_skill(SkillManager['比尔格的祝福']).currentQuality
         current_grade = score_grade(current_score)
         if current_grade >= 3:
-            self.log('no need', current_score)
+            self.log('no need', current_score,current_grade)
             return False
         temp = status.clone()
         temp.ball = BallManager.RedBall
