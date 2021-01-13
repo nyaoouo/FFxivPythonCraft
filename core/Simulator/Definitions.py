@@ -14,13 +14,14 @@ difProgress = [1, 1.05, 1.10, 1.15, 1.20, 1.25, 1.27, 1.29, 1.31, 1.33, 1.35, 1.
 suggestProp = {
     480: [2480, 2195],
     511: [2620, 2540],
+    513: [2620, 2540],
 }
 names = {
-    'DesignChanges':'设计变动',
-    'TrainedEye':'工匠的神速技巧',
-    'IntensiveSynthesis':'集中制作',
-    'DelicateSynthesis':'精密制作',
-    'Groundwork':'坯料制作',
+    'DesignChanges': '设计变动',
+    'TrainedEye': '工匠的神速技巧',
+    'IntensiveSynthesis': '集中制作',
+    'DelicateSynthesis': '精密制作',
+    'Groundwork': '坯料制作',
     'PreparatoryTouch': '坯料加工',
     'PatientTouch': '专心加工',
     'FocusedTouch': '注视加工',
