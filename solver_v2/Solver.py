@@ -5,11 +5,15 @@ from core.Simulator import Manager, Role, Status
 from core.Utils import Logger, Config, GetBall
 from core.Utils.TTS import TTS
 from .Utils import *
-from .stages import Terminator,Stage1,Stage2,Stage3,Stage4
+from .stages import Terminator, Stage1, Stage2, Stage3, Stage4, Stage1_s4
 from core.Utils.i18n import system_to_client_text as _
 
 Manager.managers_load()
-Stages = [Stage1.Stage1, Stage2.Stage2, Stage3.Stage3, Stage4.Stage4]
+skyStage = Config.config.get('SkybuilderStage', 'Stage', default='3')
+if skyStage == 4:
+    Stages = [Stage1_s4.Stage1,Stage3,Stage4]
+else:
+    Stages = [Stage1.Stage1, Stage2.Stage2, Stage3.Stage3, Stage4.Stage4]
 
 
 class Solver(object):
@@ -43,7 +47,7 @@ class Solver(object):
         if self.use_log:
 
             log_name = self.conf.get('Log', 'file_name', default="log_{time}.txt").format(time=int(time.time()))
-            folder_path=os.path.join(self.conf.BasePath, 'logs')
+            folder_path = os.path.join(self.conf.BasePath, 'logs')
             if not os.path.exists(folder_path):
                 os.mkdir(folder_path)
             self.log_path = os.path.join(folder_path, log_name)
@@ -116,7 +120,6 @@ class Solver(object):
                 f.write('|%s|%s|%s\n' % (self.status.currentProgress, self.status.currentQuality, time.perf_counter() - self.start))
         print("#" * 10 + "end" + "#" * 10)
 
-
     def reset(self):
         for stage in self.Stages:
             stage.reset()
@@ -129,7 +132,7 @@ class Solver(object):
 
     def deal(self, status, prev_skill=None):
         if self.terminate:
-            ans= self.terminator.deal(status)
+            ans = self.terminator.deal(status)
         else:
             ans = None
             while len(self.Stages) > self.on_stage:
@@ -144,7 +147,7 @@ class Solver(object):
                 ans = self.terminator.deal(status)
         if ans is not None:
             self.log("recommend:", ans)
-            if self.recall is not None:self.recall(ans)
+            if self.recall is not None: self.recall(ans)
             TTS(ans)
         else:
             print("no recommend")

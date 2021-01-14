@@ -2,13 +2,15 @@ from core.Simulator.Manager import BallManager, SkillManager
 from core.Utils.Config import config
 from . import StageBase
 from core.Utils.i18n import solver_to_client_text as _
+
 combo = [_('阔步'), _('改革'), _('观察'), _('注视加工'), _('阔步'), _('比尔格的祝福'), _('制作')]
 
-skyStage=config.get('SkybuilderStage', 'Stage', default='3')
+skyStage = config.get('SkybuilderStage', 'Stage', default='3')
 if skyStage == '4':
-    grade_line = [58000,65000,77000]
+    grade_line = [58000, 65000, 74000]
 else:
     grade_line = [58000, 65000, 77000]
+
 
 def score_grade(score: int):
     if score < grade_line[0]:
@@ -27,7 +29,7 @@ class Stage4(StageBase):
         self.Prequeue = []
         self.count = 0
         self.use_change = self.solver.conf.get('DesignChange', 'open') == 'True'
-        self.change_grade=int(self.solver.conf.get('DesignChange', 'lv',default="3"))
+        self.change_grade = int(self.solver.conf.get('DesignChange', 'lv', default="3"))
 
     def deal(self, status, prev_skill=None):
         if prev_skill.name == _('设计变动'):
@@ -54,14 +56,14 @@ class Stage4(StageBase):
         if status.ball == BallManager.RedBall:
             self.log("red ball")
             return False
-        current_score=status.use_skill(SkillManager[_('比尔格的祝福')]).currentQuality
+        current_score = status.use_skill(SkillManager[_('比尔格的祝福')]).currentQuality
         current_grade = score_grade(current_score)
         if current_grade >= 3:
-            self.log('no need', current_score,current_grade)
+            self.log('no need', current_score, current_grade)
             return False
         temp = status.clone()
         temp.ball = BallManager.RedBall
-        new_score=temp.use_skill(SkillManager[_('比尔格的祝福')]).currentQuality
-        new_grade =  score_grade(new_score)
-        self.log("score if use:",new_score,new_grade)
-        return new_grade >= self.change_grade and new_grade>current_grade
+        new_score = temp.use_skill(SkillManager[_('比尔格的祝福')]).currentQuality
+        new_grade = score_grade(new_score)
+        self.log("score if use:", new_score, new_grade)
+        return new_grade >= self.change_grade and new_grade > current_grade

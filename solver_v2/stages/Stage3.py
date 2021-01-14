@@ -31,8 +31,8 @@ class Stage3(StageBase):
         if remainCp < 0: return ans
         if remainCp >= SkillManager.getCp(_('精修'), status) and status.target.maxDurability - status.currentDurability >= 30:
             ans.append([_('精修')])
-        # if remainCp >= SkillManager.getCp('掌握', status):
-        #    ans.append(['掌握'])
+        if remainCp >= SkillManager.getCp(_('掌握'), status):
+            ans.append([_('掌握')])
         if status.ball == BallManager.RedBall:
             ans.append([_('秘诀')])
         for buff in AllowBuffs:
@@ -79,7 +79,7 @@ class Stage3(StageBase):
     def is_finished(self, status, prev_skill=None):
         if not bool(self.Prequeue) or (status.ball != BallManager.WhiteBall and status.ball != BallManager.YellowBall):
             start = time.perf_counter()
-            ans = self.try_solve(status, 5)
+            ans = self.try_solve(status, 8)
             if ans:
                 self.Prequeue = ans[1]
                 self.log("new plan in {:.2f}s:{}({})".format(time.perf_counter() - start, self.Prequeue, ans[0].currentQuality))

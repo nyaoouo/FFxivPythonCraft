@@ -84,7 +84,7 @@ maxCp = _(mCp_adr)
 lv = _(lv_adr, 2)
 craft = _(craft_adr)
 control = _(control_adr)
-currentCp = lambda: get_value(get_value(actor_table_adr, 8) + 0x18AE, 2)
+currentCp = lambda: get_value(get_value(actor_table_adr, 8) + (0x18AE if config.get('I18N','Client',default='cn')=='cn' else 0x1d8 ), 2)
 
 
 def fix_crafter(crafter: Crafter):
