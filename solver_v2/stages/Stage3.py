@@ -3,19 +3,20 @@ import time
 from core.Simulator.Manager import SkillManager, BallManager
 from core.Simulator.Status import Status
 from . import StageBase
+from core.Utils.i18n import solver_to_client_text as _
 
 durReq = 21
 cpReq = 131
 AllowBuffs = {
-    '阔步': '阔步',
-    '改革': '改革',
-    '俭约': '俭约',
+    _('阔步'): _('阔步'),
+    _('改革'): _('改革'),
+    _('俭约'): _('俭约'),
     # '长期俭约': '俭约',
 }
 AllowSkillSet = {
-    '坯料加工',
-    '集中加工',
-    '俭约加工',
+    _('坯料加工'),
+    _('集中加工'),
+    _('俭约加工'),
 }
 
 
@@ -28,22 +29,22 @@ class Stage3(StageBase):
         remainCp = status.currentCp - cpReq
         ans = list()
         if remainCp < 0: return ans
-        if remainCp >= SkillManager.getCp('精修', status) and status.target.maxDurability - status.currentDurability >= 30:
-            ans.append(['精修'])
+        if remainCp >= SkillManager.getCp(_('精修'), status) and status.target.maxDurability - status.currentDurability >= 30:
+            ans.append([_('精修')])
         # if remainCp >= SkillManager.getCp('掌握', status):
         #    ans.append(['掌握'])
         if status.ball == BallManager.RedBall:
-            ans.append(['秘诀'])
+            ans.append([_('秘诀')])
         for buff in AllowBuffs:
             if not status.has_buff(buff) and remainCp >= SkillManager.getCp(buff, status):
                 ans.append([buff])
-        if ['改革'] not in ans or status.ball == BallManager.RedBall:
+        if [_('改革')] not in ans or status.ball == BallManager.RedBall:
             for skill in AllowSkillSet:
                 if status.currentDurability > SkillManager.getDurability(skill, status) and remainCp >= SkillManager.getCp(skill, status) and \
                         SkillManager[skill].can_use(status):
                     ans.append([skill])
             if remainCp >= 25 and status.currentDurability >= 10:
-                ans.append(['观察', '注视加工'])
+                ans.append([_('观察'), _('注视加工')])
         return ans
 
     def try_solve(self, status: Status, timeLimit=None):

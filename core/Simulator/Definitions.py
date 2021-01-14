@@ -16,6 +16,7 @@ suggestProp = {
     511: [2620, 2540],
     513: [2620, 2540],
 }
+
 names = {
     'DesignChanges': '设计变动',
     'TrainedEye': '工匠的神速技巧',
@@ -51,3 +52,8 @@ names = {
     'PreciseTouch': '集中加工',
     'WasteNotTwo': '长期俭约'
 }
+
+
+def set_names(dictionary):
+    global names
+    names = dictionary

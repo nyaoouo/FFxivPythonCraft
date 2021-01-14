@@ -50,7 +50,7 @@ class _BallManager(dict):
             if isclass(cls) and cls != Models.BuffBase and issubclass(cls, Models.BallBase):
                 setattr(self, attr, cls())
                 self[attr] = getattr(self, attr)
-                self[cls.name] = getattr(self, attr)
+                self[self[attr].name] = getattr(self, attr)
         self.defaultBall = self[Balls.DefaultBall.name] if hasattr(Balls, "DefaultBall") else Models.BallBase()
 
 

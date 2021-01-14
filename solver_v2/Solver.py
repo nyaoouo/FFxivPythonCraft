@@ -6,6 +6,7 @@ from core.Utils import Logger, Config, GetBall
 from core.Utils.TTS import TTS
 from .Utils import *
 from .stages import Terminator,Stage1,Stage2,Stage3,Stage4
+from core.Utils.i18n import system_to_client_text as _
 
 Manager.managers_load()
 Stages = [Stage1.Stage1, Stage2.Stage2, Stage3.Stage3, Stage4.Stage4]
@@ -67,7 +68,7 @@ class Solver(object):
             else:
                 data = data[1].rsplit(" ", 1)
             if len(data) == 2:
-                data[0] += "" if data[1] == "成功" else ":fail"
+                data[0] += "" if data[1] == _("Success") else ":fail"
             if data[0] in Manager.SkillManager:
                 return self.use_skill(Manager.SkillManager[data[0]])
             else:

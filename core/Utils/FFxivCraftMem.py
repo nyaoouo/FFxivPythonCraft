@@ -5,10 +5,10 @@ from core.Simulator.Status import Status
 from core.Simulator.Manager import BallManager
 from core.Simulator.Role import Crafter
 from core.Utils.SetAdmin import check
-
+from .i18n import get_client_offset
 check()
 config_section_name = 'FFxivMemory'
-
+client_offset=get_client_offset()
 
 def log(msg):
     Logger(msg, tag="FFxivMem")
@@ -20,6 +20,7 @@ def get_config_hex(key: str):
     log("Load config:" + key)
     return int(temp.lstrip('0x'), 16)
 
+hs2int=lambda x:int(x.lstrip('0x'), 16)
 
 def get_value(addr, length):
     return int.from_bytes(pm.read_bytes(addr, length), byteorder='little')
@@ -32,9 +33,15 @@ if pid is not None:
     pm.open_process_from_id(int(pid))
 else:
     pm = Pymem(config.try_get(config_section_name, 'application_name') or 'ffxiv_dx11.exe')
+'''
 progress_offset = get_config_hex('current_progress') or 0x1D51C8C
 cp_offset = get_config_hex('player_cp') or 0x1D307B4
 actor_table_offset = get_config_hex('actor_table') or 0x1d2cf20
+'''
+
+progress_offset = hs2int(client_offset['CurrentProgress'])
+cp_offset = hs2int(client_offset['MaxCp'])
+actor_table_offset = hs2int(client_offset['ActorTable'])
 cProgress_adr = pm.process_base.lpBaseOfDll + progress_offset
 cQuality_adr = cProgress_adr + 0x8
 cDurability_adr = cProgress_adr + 0x14
@@ -50,17 +57,20 @@ actor_table_adr = pm.process_base.lpBaseOfDll + actor_table_offset
 def _(adr, len=4):
     return lambda: get_value(adr, len)
 
-
-ballColor = {
-    0: "defaultBall",
-    1: "WhiteBall",
-    2: "RedBall",
-    3: "RainbowBall",
-    4: "BlackBall",
-    5: "YellowBall",
-    6: "BlueBall",
-    7: "GreenBall"
-}
+stage=config.get('SkybuilderStage','Stage',default='3')
+if stage == '4':
+    pass#Todo
+else:
+    ballColor = {
+        0: "defaultBall",
+        1: "WhiteBall",
+        2: "RedBall",
+        3: "RainbowBall",
+        4: "BlackBall",
+        5: "YellowBall",
+        6: "BlueBall",
+        7: "GreenBall"
+    }
 
 currentProgress = _(cProgress_adr)
 currentQuality = _(cQuality_adr)

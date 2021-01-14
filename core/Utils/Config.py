@@ -1,6 +1,6 @@
 import sys
 from os import path
-import configparser
+from .configparserNoLower import ConfigParser
 
 filename = "config.ini"
 
@@ -11,7 +11,7 @@ class _config(object):
         configPath = path.join(self.BasePath, name)
         if not path.exists(configPath):
             raise Exception("config.ini not found")
-        self.configparser = configparser.ConfigParser()
+        self.configparser = ConfigParser()
         self.configparser.read(configPath, encoding='utf-8')
 
     def get(self, section: str, key: str, default=None, require=False):

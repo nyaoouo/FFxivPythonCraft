@@ -1,6 +1,7 @@
 /dist/
 /build/
 /main.spec
+/LogAnalysis.spec
 /log.txt
 /ignore/
 /.idea/

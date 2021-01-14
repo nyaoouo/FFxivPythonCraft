@@ -10,7 +10,10 @@ class SkillBase(object):
 
     def __init__(self):
         if not hasattr(self, "name"):
-            self.name = names[type(self).__name__]
+            if type(self).__name__ in names:
+                self.name = names[type(self).__name__]
+            else:
+                self.name = type(self).__name__
 
     def progress(self, status):
         return 0
@@ -65,7 +68,10 @@ class BuffBase(object):
 
     def __init__(self):
         if not hasattr(self, "name"):
-            self.name = names[type(self).__name__]
+            if type(self).__name__ in names:
+                self.name = names[type(self).__name__]
+            else:
+                self.name = type(self).__name__
 
     def __str__(self):
         return self.name
@@ -94,11 +100,17 @@ class BuffBase(object):
 
 
 class BallBase(object):
-    name = "unnamed ball"
     progress = 1
     quality = 1
     durability = 1
     cp = 1
+
+    def __init__(self):
+        if not hasattr(self, "name"):
+            if type(self).__name__ in names:
+                self.name = names[type(self).__name__]
+            else:
+                self.name = type(self).__name__
 
     def __str__(self):
         return self.name

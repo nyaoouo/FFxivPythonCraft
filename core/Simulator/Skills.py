@@ -3,7 +3,6 @@ from .Manager import BuffManager, BallManager
 import math
 from .Definitions import names
 
-
 class TEST_FULL_progress(SkillBase):
     name = "test full progress"
     progress = 9999999999

@@ -1,6 +1,6 @@
 from core.Utils.Config import config
 
-t=config['ball']['type']
+t=config.get('ball','type',default="input")
 if t=="memory":
     from . import Memory
     c=Memory
