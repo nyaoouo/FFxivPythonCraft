@@ -11,12 +11,16 @@ AllowBuffs = {
     _('阔步'): _('阔步'),
     _('改革'): _('改革'),
     _('俭约'): _('俭约'),
-    # '长期俭约': '俭约',
+    _('观察'): _('观察'),
 }
 AllowSkillSet = {
     _('坯料加工'),
     _('集中加工'),
     _('俭约加工'),
+}
+AllowSkillSetObserve = {
+    _('集中加工'),
+    _('注视加工'),
 }
 
 
@@ -31,20 +35,24 @@ class Stage3(StageBase):
         if remainCp < 0: return ans
         if remainCp >= SkillManager.getCp(_('精修'), status) and status.target.maxDurability - status.currentDurability >= 30:
             ans.append([_('精修')])
-        if remainCp >= SkillManager.getCp(_('掌握'), status):
+        if status.ball != BallManager.WhiteBall or \
+                status.currentCp > 200 and \
+                status.currentDurability < 40 and \
+                not status.has_buff(_('掌握')) and \
+                not status.has_buff(_('改革')) and \
+                not status.has_buff(_('阔步')):
             ans.append([_('掌握')])
         if status.ball == BallManager.RedBall:
             ans.append([_('秘诀')])
-        for buff in AllowBuffs:
-            if not status.has_buff(buff) and remainCp >= SkillManager.getCp(buff, status):
-                ans.append([buff])
-        if [_('改革')] not in ans or status.ball == BallManager.RedBall:
-            for skill in AllowSkillSet:
+        if not status.has_buff(_('观察')) or status.ball in [BallManager.PurpleBall]:
+            for buff in AllowBuffs:
+                if not status.has_buff(buff) and remainCp >= SkillManager.getCp(buff, status):
+                    ans.append([buff])
+        if status.has_buff(_('改革')) or remainCp < 50 or status.ball in [BallManager.RedBall,BallManager.BlueBall]:
+            for skill in AllowSkillSetObserve if status.has_buff(_('观察')) else AllowSkillSet:
                 if status.currentDurability > SkillManager.getDurability(skill, status) and remainCp >= SkillManager.getCp(skill, status) and \
                         SkillManager[skill].can_use(status):
                     ans.append([skill])
-            if remainCp >= 25 and status.currentDurability >= 10:
-                ans.append([_('观察'), _('注视加工')])
         return ans
 
     def try_solve(self, status: Status, timeLimit=None):
@@ -67,17 +75,15 @@ class Stage3(StageBase):
                 if tempStats.get_status_string() not in record:
                     record.add(tempStats.get_status_string())
                     newData = [tempStats, tempData[1] + skills]
-                    if tempStats.currentDurability > durReq and (best is None or tempStats.currentQuality > best[0].currentQuality):
-                        for s in newData[1]:
-                            if s not in AllowBuffs:
-                                best = newData
-                                break
+                    if skills[-1] not in AllowBuffs and tempStats.currentDurability > durReq and (
+                            best is None or tempStats.currentQuality > best[0].currentQuality):
+                        best = newData
                     queue.append(newData)
         self.solver.cli_logger.showTag("Math")
         return best
 
     def is_finished(self, status, prev_skill=None):
-        if not bool(self.Prequeue) or (status.ball not in [BallManager.WhiteBall,BallManager.YellowBall,BallManager.DeepBlueBall]):
+        if not bool(self.Prequeue) or (status.ball not in [BallManager.WhiteBall, BallManager.YellowBall, BallManager.DeepBlueBall]):
             start = time.perf_counter()
             ans = self.try_solve(status, 8)
             if ans:
