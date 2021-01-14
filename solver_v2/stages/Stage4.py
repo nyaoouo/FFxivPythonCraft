@@ -1,15 +1,21 @@
 from core.Simulator.Manager import BallManager, SkillManager
+from core.Utils.Config import config
 from . import StageBase
 from core.Utils.i18n import solver_to_client_text as _
 combo = [_('阔步'), _('改革'), _('观察'), _('注视加工'), _('阔步'), _('比尔格的祝福'), _('制作')]
 
+skyStage=config.get('SkybuilderStage', 'Stage', default='3')
+if skyStage == '4':
+    grade_line = [58000,65000,77000]
+else:
+    grade_line = [58000, 65000, 77000]
 
 def score_grade(score: int):
-    if score < 58000:
+    if score < grade_line[0]:
         return 0
-    elif score < 65000:
+    elif score < grade_line[1]:
         return 1
-    elif score < 77000:
+    elif score < grade_line[2]:
         return 2
     else:
         return 3
