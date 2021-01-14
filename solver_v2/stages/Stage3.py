@@ -77,7 +77,7 @@ class Stage3(StageBase):
         return best
 
     def is_finished(self, status, prev_skill=None):
-        if not bool(self.Prequeue) or (status.ball != BallManager.WhiteBall and status.ball != BallManager.YellowBall):
+        if not bool(self.Prequeue) or (status.ball not in [BallManager.WhiteBall,BallManager.YellowBall,BallManager.DeepBlueBall]):
             start = time.perf_counter()
             ans = self.try_solve(status, 8)
             if ans:
