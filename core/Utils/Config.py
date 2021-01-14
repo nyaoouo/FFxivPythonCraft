@@ -10,7 +10,7 @@ class _config(object):
         self.BasePath = path.dirname(sys.argv[0])
         configPath = path.join(self.BasePath, name)
         if not path.exists(configPath):
-            raise Exception("config.ini not found")
+            raise Exception(configPath+" not found")
         self.configparser = ConfigParser()
         self.configparser.read(configPath, encoding='utf-8')
 

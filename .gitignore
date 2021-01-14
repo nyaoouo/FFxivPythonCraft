@@ -12,3 +12,4 @@
 /logs/
 *.pyc
 /config.ini
+/config_test.ini
