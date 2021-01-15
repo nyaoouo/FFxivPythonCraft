@@ -1,6 +1,7 @@
 from core.Simulator.Manager import BallManager, SkillManager
 from core.Simulator.Status import Status
 from core.Utils.i18n import solver_to_client_text as _
+from ..Utils import InnerQuietLv
 from . import StageBase
 
 
@@ -10,20 +11,22 @@ class Stage1(StageBase):
         return status.currentProgress + temp >= status.target.maxProgress
 
     def deal(self, status, prev_skill=None):
-        if status.rounds >= 20 or status.currentCp < 300:
-            return 'terminate'
+        if prev_skill == SkillManager[_('高速制作')+':fail']:
+            self.count += 1
         if status.rounds == 1:
             return _('闲静')
+        if self.count>3 or InnerQuietLv(status) < 2 or status.rounds >= 20 or status.currentCp < 300:
+            return 'terminate'
         if status.ball == BallManager.GreenBall:
             if not status.has_buff(_('掌握')): return _('掌握')
             if status.currentDurability < 20: return _('精修')
             # if status.has_buff(_('俭约')): return _('长期俭约')
         if status.ball == BallManager.RedBall:
-            if status.has_buff(_('内静')) and status.get_buff(_('内静')).data["lv"] < 10 and status.currentDurability > 10:
+            if InnerQuietLv(status) < 10 and status.currentDurability > 10:
                 return _('集中加工')
             return _('秘诀')
         if status.ball == BallManager.YellowBall:
-            if status.has_buff(_('内静')) and status.get_buff(_('内静')).data["lv"] < 6 and status.currentDurability > 10:
+            if InnerQuietLv(status) < 6 and status.currentDurability > 10:
                 return _('专心加工')
         if status.currentDurability - (status.ball.durability * 10) <= 0:
             return _('精修')
@@ -35,3 +38,6 @@ class Stage1(StageBase):
                 return _('高速制作')
         else:
             return _('崇敬')
+    def reset(self):
+
+        self.count=0

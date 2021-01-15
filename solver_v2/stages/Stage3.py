@@ -35,9 +35,7 @@ class Stage3(StageBase):
         if remainCp < 0: return ans
         if remainCp >= SkillManager.getCp(_('精修'), status) and status.target.maxDurability - status.currentDurability >= 30:
             ans.append([_('精修')])
-        if (status.ball != BallManager.WhiteBall and remainCp>SkillManager.getCp(_('掌握'), status)) or \
-                status.currentCp > 200 and \
-                status.currentDurability < 40 and \
+        if status.currentCp > 200 and \
                 not status.has_buff(_('掌握')) and \
                 not status.has_buff(_('改革')) and \
                 not status.has_buff(_('阔步')):
