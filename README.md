@@ -1,6 +1,5 @@
-```diff
-- 本插件停止维护，辅助功能移至隔壁[fpt2](https://github.com/nyaoouo/FFxivPythonTrigger2)
-```
+本插件停止维护，辅助功能移至隔壁[fpt2](https://github.com/nyaoouo/FFxivPythonTrigger2)
+===
 
 高难外置思考回路
 ====
